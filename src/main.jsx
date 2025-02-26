@@ -4,6 +4,8 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './COMPONENTS/ErrorPage.jsx'
 import MainLayout from './MainLayout/MainLayout.jsx'
+import AddCoffee from './COMPONENTS/AddCoffee.jsx'
+import AvailableCoffee from './COMPONENTS/AvailableCoffee.jsx'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
         
       }
     ]
+  },
+  {
+    path: '/addCoffee',
+    element: <AddCoffee></AddCoffee>
+  },
+  {
+    path: '/availableCoffee',
+    element: <AvailableCoffee></AvailableCoffee>
   }
 ])
 createRoot(document.getElementById('root')).render(
