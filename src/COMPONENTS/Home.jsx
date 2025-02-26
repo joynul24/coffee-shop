@@ -1,12 +1,10 @@
 import AvailableCoffee from "./AvailableCoffee";
 import Banner from "./Banner";
-import CoffeeGalary from "./Navber/CoffeeGalary";
-import Navber from "./Navber/Navber";
+import CoffeeGalary from "./CoffeeGalary";
 
 function Home() {
   return (
     <div>
-        <Navber></Navber>
         <Banner></Banner>
         <AvailableCoffee></AvailableCoffee>
         <CoffeeGalary></CoffeeGalary>
