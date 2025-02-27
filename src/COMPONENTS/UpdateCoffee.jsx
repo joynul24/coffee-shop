@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Navber from "./Navber/Navber";
 import Swal from "sweetalert2";
 
-const AddCoffee = () => {
-  
-  
-  const handleAddCoffee = (e) => {
+const UpdateCoffee = () => {
+  const coffee = useLoaderData();
+  const { _id, name, quantity, supplier, taste, category, details, photo } =
+    coffee;
+
+  const handleUpdateCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -15,7 +17,7 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    const newCoffee = {
+    const newUpdateCoffee = {
       name,
       quantity,
       supplier,
@@ -24,26 +26,25 @@ const AddCoffee = () => {
       details,
       photo,
     };
-    console.log(newCoffee);
-    fetch('http://localhost:5000/coffees', {
-      method: 'POST',
+    // console.log(newUpdateCoffee);
+    fetch(`http://localhost:5000/coffees/${_id}`, {
+      method: "put",
       headers: {
-        "content-type" : "application/json"
+        "content-type": "application/json",
       },
-      body: JSON.stringify(newCoffee)
+      body: JSON.stringify(newUpdateCoffee),
     })
-    .then(res => res.json())
-    .then(data => {
-      // console.log(data);
-      if(data.insertedId) {
-        Swal.fire({
-          title: "Coffee added Successfuly",
-          icon: "success",
-          draggable: true
-        });
-        form.reset()
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Coffee updated Successfuly",
+            icon: "success",
+            draggable: true,
+          });
+        }
+      });
   };
 
   return (
@@ -56,7 +57,9 @@ const AddCoffee = () => {
           </button>
         </Link>
         <div className="bg-[#F4F3F0] py-16 px-28 rounded-2xl mt-10">
-          <h2 className="text-center text-4xl font-bold">Add New Coffee</h2>
+          <h2 className="text-center text-4xl font-bold">
+            Update Existing Coffee Details
+          </h2>
           <p className="text-center w-[900px] mx-auto my-4 font-raleway">
             It is a long established fact that a reader will be distraceted by
             the readable content of a page when looking at its layout. The point
@@ -64,7 +67,7 @@ const AddCoffee = () => {
             distribution of letters, as opposed to using Content here.
           </p>
           {/* form Section */}
-          <form onSubmit={handleAddCoffee} className="font-raleway">
+          <form onSubmit={handleUpdateCoffee} className="font-raleway">
             {/* coffee name and quantity row */}
             <div className="flex justify-between gap-6">
               <fieldset className="w-1/2 fieldset">
@@ -75,6 +78,7 @@ const AddCoffee = () => {
                   name="name"
                   type="text"
                   className="input w-full"
+                  defaultValue={name}
                   placeholder="coffee name"
                 />
               </fieldset>
@@ -86,6 +90,7 @@ const AddCoffee = () => {
                   name="quantity"
                   type="text"
                   className="input w-full"
+                  defaultValue={quantity}
                   placeholder="quantity"
                 />
               </fieldset>
@@ -100,6 +105,7 @@ const AddCoffee = () => {
                   name="supplier"
                   type="text"
                   className="input w-full"
+                  defaultValue={supplier}
                   placeholder="supplier"
                 />
               </fieldset>
@@ -111,6 +117,7 @@ const AddCoffee = () => {
                   name="taste"
                   type="text"
                   className="input w-full"
+                  defaultValue={taste}
                   placeholder="taste"
                 />
               </fieldset>
@@ -125,6 +132,7 @@ const AddCoffee = () => {
                   name="category"
                   type="text"
                   className="input w-full"
+                  defaultValue={category}
                   placeholder="category"
                 />
               </fieldset>
@@ -136,6 +144,7 @@ const AddCoffee = () => {
                   name="details"
                   type="text"
                   className="input w-full"
+                  defaultValue={details}
                   placeholder="details"
                 />
               </fieldset>
@@ -150,12 +159,13 @@ const AddCoffee = () => {
                   name="photo"
                   type="text"
                   className="input w-full"
+                  defaultValue={photo}
                   placeholder="photo url"
                 />
               </fieldset>
             </div>
             <button className="btn w-full hover:bg-[#b39369] bg-[#D2B48C] border-[#331A15] mt-5">
-              Add Coffee
+              Update Coffee
             </button>
           </form>
         </div>
@@ -164,4 +174,4 @@ const AddCoffee = () => {
   );
 };
 
-export default AddCoffee;
+export default UpdateCoffee;
