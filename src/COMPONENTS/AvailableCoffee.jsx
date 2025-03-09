@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import CoffeeCard from "./CoffeeCard";
 import { useState } from "react";
+import { FaUser, FaUserAlt } from "react-icons/fa";
 
 const AvailableCoffee = () => {
   const loadedCoffees = useLoaderData();
@@ -20,12 +21,18 @@ const AvailableCoffee = () => {
               Add Coffee <i className="fa-solid fa-mug-hot"></i>
             </button>
           </Link>
-          {/* Update Coffee button */}
-          {/* <Link to="/updateCoffee">
-            <button className="btn bg-[#E3B577] border-[#331A15] hover:bg-transparent">
-              Update Coffee <i className="fa-solid fa-mug-hot"></i>
+          {/* Sign Up button */}
+          <Link to="/signUp">
+            <button className="btn font-raleway font-bold bg-[#E3B577] border-[#331A15] hover:bg-transparent">
+              Sign Up <FaUser></FaUser>
             </button>
-          </Link> */}
+          </Link>
+          {/* Login button */}
+          <Link to="/login">
+            <button className="btn font-raleway font-bold bg-[#E3B577] border-[#331A15] hover:bg-transparent">
+              Login <FaUserAlt></FaUserAlt>
+            </button>
+          </Link>
         </div>
         {/* available loadedCoffees */}
         <div className="grid grid-cols-1 md:grid-cols-2 mt-15 gap-6">
